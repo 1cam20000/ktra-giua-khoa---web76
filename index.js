@@ -11,7 +11,7 @@ const PORT = 3080;
 const app = express();
 app.use(express.json());
 // app.use(checkLoggedIn);
-// app.use("/user", userRouter);
+app.use("/user", userRouter); //api for user (curd user)
 // console.log("🚀 ~ userRouter:", userRouter)
 
 mongoose
@@ -22,10 +22,10 @@ mongoose
   .catch((err) => console.log("error: ", err));
 app.listen(PORT, console.log(`running in http//localhost:${PORT}`));
 //
-app.post("/create-user", async (req, res) => {
-  const user = createUser(req.body);
-  res.json(user);
-});
+// app.post("/create-user", async (req, res) => {
+//   const user = createUser(req.body);
+//   res.json(user);
+// });
 
 //
 //api danh nhap
