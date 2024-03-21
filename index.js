@@ -23,15 +23,8 @@ mongoose
 app.listen(PORT, console.log(`running in http//localhost:${PORT}`));
 //
 app.post("/create-user", async (req, res) => {
-  const user = new userModel({
-    email,
-    name,
-    birth,
-    address,
-    nation,
-    password,
-  });
-  return user;
+  const user = createUser(req.body);
+  res.json(user);
 });
 
 //
