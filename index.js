@@ -1,15 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
 import { checkLoggedIn } from "./services/middleware.js";
-import userRouter  from "./controllers/user.controller.js";
+import userRouter from "./controllers/user.controller.js";
 import { createUser, findOneUser } from "./services/user.service.js";
 import jwt from "jsonwebtoken";
 import { deleteProfile, updateProfile } from "./services/profile.service.js";
+import { userModel } from "./models/user.model.js";
 
-const PORT = 8080;
+const PORT = 3080;
 const app = express();
 app.use(express.json());
-app.use(checkLoggedIn);
+// app.use(checkLoggedIn);
 // app.use("/user", userRouter);
 // console.log("🚀 ~ userRouter:", userRouter)
 
@@ -19,13 +20,19 @@ mongoose
   )
   .then(() => console.log("connected!!"))
   .catch((err) => console.log("error: ", err));
-app.listen(PORT, console.log(`running in http//localhost:${8080}`));
+app.listen(PORT, console.log(`running in http//localhost:${PORT}`));
 //
 app.post("/create-user", async (req, res) => {
-    const user = await createUser(req.body);
-    console.log("🚀 ~ userRouter.post ~ user:", user);
-    res.json(user);
+  const user = new userModel({
+    email,
+    name,
+    birth,
+    address,
+    nation,
+    password,
   });
+  return user;
+});
 
 //
 //api danh nhap
