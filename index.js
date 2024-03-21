@@ -6,12 +6,14 @@ import { createUser, findOneUser } from "./services/user.service.js";
 import jwt from "jsonwebtoken";
 import { deleteProfile, updateProfile } from "./services/profile.service.js";
 import { userModel } from "./models/user.model.js";
+import profileRouter from "./controllers/profile.controller.js";
 
 const PORT = 3080;
 const app = express();
 app.use(express.json());
 // app.use(checkLoggedIn);
 app.use("/user", userRouter); //api for user (curd user)
+app.use("/profile", profileRouter);
 // console.log("🚀 ~ userRouter:", userRouter)
 
 mongoose

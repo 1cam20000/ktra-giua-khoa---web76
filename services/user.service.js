@@ -11,6 +11,8 @@ const createUser = async (body) => {
     nation,
     password,
   });
+  console.log("🚀 ~ createUser ~ user:", user)
+  
   return user;
 };
 
