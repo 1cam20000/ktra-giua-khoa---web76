@@ -12,6 +12,7 @@ const createProfile = async (body) => {
 };
 
 const updateProfile = async (id, body) => {
+  const { email, skill, hobby, aim } = body;
   const profile = await profileModel.findByIdAndUpdate(id, {
     skill,
     hobby,
@@ -32,4 +33,4 @@ const deleteProfile = async (profileId, callback) => {
   }
 };
 
-export { deleteProfile, updateProfile };
+export { deleteProfile, updateProfile, createProfile };

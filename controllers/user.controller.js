@@ -12,13 +12,15 @@ userRouter.use(checkLoggedIn);
 
 userRouter.get("/users", async (req, res) => {
   const users = await allUsers();
+  console.log("🚀 ~ userRouter.get ~ users:", users);
+
   res.json(users);
 });
 
 userRouter.post("/create-user", async (req, res) => {
   const user = await createUser(req.body);
   console.log("🚀 ~ userRouter.post ~ user:", user);
-  res.json(user);
+  res.json({ user });
 });
 
 userRouter.put("/update-user/:id", async (req, res) => {
