@@ -3,9 +3,11 @@ import {
   allUsers,
   createUser,
   deleteUser,
+  findOneUser,
   updateUser,
 } from "../services/user.service.js";
 import { checkLoggedIn } from "../services/middleware.js";
+import jwt from "jsonwebtoken";
 
 const userRouter = express.Router();
 userRouter.use(checkLoggedIn);
@@ -37,6 +39,31 @@ userRouter.delete("/delete-user/:userId", async (req, res) => {
       res.json("user delete successfully");
     }
   });
+});
+
+//api user login
+userRouter.post("/login", () => {
+  //get email & password form req
+  const { email, password } = body;
+  //find user from database by email
+  const userLogin = findOneUser({ email, password });
+  //if user existed
+  if (userLogin) {
+    //create payload
+    const payload = {
+      email,
+      name,
+      birth,
+      address,
+      nation,
+    };
+    const token = jwt.sign(payload, "do not see", { expiresIn: "1h" });
+    res.json({ token });
+  }
+  //if user not found
+  else {
+    res.json("user not found!!!!");
+  }
 });
 
 export default userRouter;
